@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LibroHive – Digital Reading & Publishing Platform
 
-## Getting Started
+LibroHive is a modern digital reading and publishing platform designed for seamless exploration of books, immersive chapter-wise reading, and a full social experience for both readers and authors. Built with **Next.js 15**, **TypeScript**, **Prisma**, and **PostgreSQL**, it delivers a performant, responsive, and feature-rich environment for storytelling.
 
-First, run the development server:
+---
+
+##  Features
+
+### Interactive Book Discovery
+- Instagram Reels–style **vertical scroll reading feed**
+- Infinite scroll for smooth exploration
+- Trending, popular, and personalized recommendations
+
+### Authentication & User System
+- Email, Google, and GitHub login via NextAuth
+- **Two-Factor Authentication (2FA)**
+- User profiles with bio, avatar, and social links
+- Follow/unfollow authors
+
+### Book & Chapter Management
+- Create, edit, and publish books
+- Rich text editor for writing chapters
+- Draft + publish workflow
+- Upload book covers and add metadata (genre, tags, description)
+- Reorder and manage chapters easily
+
+### Reading Experience
+- Reading progress tracking
+- Bookmarks & favorites
+- Comments, replies, and chapter discussions
+- Ratings and reviews
+- Reading statistics and history
+
+### Social Layer
+- Like, save, comment on books and chapters
+- Follow authors to get their latest content
+- Activity feed with real-time updates
+
+### UI/UX Highlights
+- Mobile-first responsive UI
+- Light/Dark themes
+- Smooth transitions and animations
+- Toast notifications and clean interactions
+
+---
+
+## Tech Stack
+
+| Category | Technologies |
+|---------|--------------|
+| Frontend | Next.js 15, TypeScript, Tailwind CSS |
+| Backend | Next.js App Router API, Prisma ORM |
+| Database | PostgreSQL |
+| Auth | NextAuth (OAuth + Credentials + 2FA) |
+| Validation | Zod |
+| Email | Resend |
+
+---
+
+##Installation & Setup
+
+### 1. Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/jitendraSingh23/Librohive.git
+cd librohive
+```
+##2. Install Dependencies
+```bash
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env` file:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+DATABASE_URL=
+DATABASE_URL_UNPOOLED=
 
-## Learn More
+AUTH_SECRET="your-secret"
 
-To learn more about Next.js, take a look at the following resources:
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+RESEND_API_KEY=
 
-## Deploy on Vercel
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+```
+### 4. Prisma Setup
+```
+npx prisma generate
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 5. Prisma Setup
+```
+npx prisma migrate dev
+```
+### 6. Start Development Server
+```
+npm run dev
+```
+Your app will now be available at:
+```
+http://localhost:3000
+```

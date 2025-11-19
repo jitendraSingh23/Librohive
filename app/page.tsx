@@ -1,101 +1,191 @@
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+import RootHeader from "@/components/Root-header";
 import Image from "next/image";
+import placeholder from "../public/img/onebyone.png";
+import { Button } from "@/components/ui/button";
+import Statistics from "@/components/StatisticsHome";
+import KeyFeatures from "@/components/KeyFeatures";
+import { Upload } from "lucide-react";
+import { FeaturedAuthors } from "@/components/FeaturedAuthors";
+import Footer from "@/components/Footer";
+import TrendingBooks from "@/components/TrendingBooks";
+import Link from "next/link";
+import SignupButton from "@/components/auth/signup-button";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+
+  // If user is logged in, redirect to the protected home page
+  if (session?.user) {
+    redirect("/home");
+  }
+
+  // If not logged in, show the landing page
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <div className="flex min-h-screen flex-col  ">
+      <div className="sticky top-0 z-40">
+        <RootHeader />
+      </div>
+      <section>
+        <div className="flex justify-between lg:px-20 md:px-10 sm:px-10  bg-accent-foreground py-20 md:py-52">
+          <div className=" relative -top-20 hidden md:flex lg:flex ">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src={placeholder}
+              alt="hero"
+              className="relative top-0.5 border-4 border-black"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <Image
+              src={placeholder}
+              alt="hero"
+              className="relative top-20 right-20 border-4 border-black"
+            />
+            <Image
+              src={placeholder}
+              alt="hero"
+              className="relative top-40 right-120 border-4 border-black"
+            />
+          </div>
+          <div className="flex flex-col gap-6 px-5 ">
+            <h1 className="text-3xl font-bold tracking-tighter sm:text-3xl xl:text-6xl/none">
+              The Next Generation of Digital Reading
+            </h1>
+            <p className="max-w-[600px] text-muted-foreground sm:text-xs md:text-lg">
+              Write, publish, and read books with a highly interactive and
+              personalized experience.
+            </p>
+            <div className="flex flex-col gap-2 min-[400px]:flex-row">
+              <Link href={"/books"}>
+                <Button size="lg">Start Reading</Button>{" "}
+              </Link>
+              <Link href={"/write"}>
+                <Button size="lg" variant="outline">
+                  Start Writing
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+      {
+        //key statistics
+      }
+      <section className="flex flex-wrap justify-center bg-muted  gap-6 px-20 py-6 md:py-24 lg:py-32">
+        <Statistics title="Total Users" value="1,250" />
+        <Statistics title="Total Books" value="2,500" />
+        <Statistics title="Total PDFs" value="1,000" />
+      </section>
+      {
+        //key features
+      }{" "}
+      <section className="flex flex-col  items-center py-6 md:py-12 w-full gap-5 bg-accent-foreground">
+        <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+          Key Features
+        </h1>
+        <p className=" text-muted-foreground md:text-xl px-6 text-center">
+          Everything you need for the ultimate reading and writing experience
+        </p>
+
+        <div className="grid  grid-rows-2 gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 xl:grid-cols-3 px-10">
+          {[...Array(6)].map((_, i) => (
+            <KeyFeatures
+              title="PDF Section"
+              des="Browse PDFs like Instagram Reels—scrolling to explore different documents."
+              Icon={Upload}
+              key={i}
+            />
+          ))}
+        </div>
+      </section>
+      {
+        // trending books
+      }
+      <section className="flex flex-col items-center gap-6 py-6 md:py-12 bg-muted">
+        <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+          Trending Books
+        </h1>
+        <p className="text-muted-foreground md:text-xl px-6 text-center">
+          Discover what others are reading right now
+        </p>
+        <div className="container px-4 md:px-6">
+          <div className="relative mx-auto max-w-5xl py-12">
+            <TrendingBooks />
+          </div>
+        </div>
+      </section>
+      {
+        //trending pdfs
+      }
+      <section className=" flex flex-col  items-center gap-6 py-6 md:py-12 bg-muted ">
+        <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+          Featured Authors
+        </h1>
+        <p className=" text-muted-foreground md:text-xl px-6 text-center">
+          Explore our unique PDF section with a reel-like browsing experience
+        </p>
+        <div className="container px-4 md:px-6">
+          <div className="relative mx-auto max-w-5xl py-6">
+            {/* Scroll Container */}
+            <div className="mx-auto max-w-5xl ">
+              <FeaturedAuthors />
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center py-6">
+        <Link href={"/home"}>
+       
+          <Button variant="outline" size="lg">
+            More Authors
+          </Button> </Link>
+        </div>
+      </section>
+      <section className="py-12 md:py-24 px-10 overflow-hidden  ">
+        <div className="flex container px-4 md:px-6 flex-col gap-20 md:flex-row ">
+          <div className="flex flex-col justify-center space-y-4">
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                Start Your Reading Journey Today
+              </h2>
+              <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                Join thousands of readers and writers on the most interactive
+                reading platform.
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 min-[400px]:flex-row">
+              <SignupButton mode="modal">
+                <Button size="lg">Sign up</Button>
+              </SignupButton>
+              <Button size="lg" variant="outline">
+                Learn More
+              </Button>
+            </div>
+          </div>
+          <div className=" hidden md:flex lg:relative -top-20 -right-50 md:scale-50 lg:scale-100">
+            <Image
+              src={placeholder}
+              alt="hero"
+              width={200}
+              height={200}
+              className="relative top-0.5 border-4 border-black"
+            />
+            <Image
+              src={placeholder}
+              alt="hero"
+              width={200}
+              height={200}
+              className="relative top-40 right-10 border-4 border-black"
+            />
+            <Image
+              src={placeholder}
+              alt="hero"
+              width={200}
+              height={200}
+              className="relative top-40 right-130 border-4 border-black"
+            />
+          </div>
+        </div>
+      </section>
+      <Footer />
     </div>
   );
 }
